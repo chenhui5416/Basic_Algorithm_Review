@@ -1,5 +1,5 @@
 /**
- * 折半查找,折半查找适用于已经排好序的顺序表
+ * 折半查找,折半查找适用于已经排好序的顺序表，时间复杂度o(logn)
  */
 function binarySearch(arr, key) {
 	var low = 0, high = arr.length-1, mid = parseInt((high + low) / 2);
