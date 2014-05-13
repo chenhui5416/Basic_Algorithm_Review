@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+  	<title>下来菜单联动</title>
+  </head>
+  <body>
+  	<form>
+      <select id="father">
+        <option value="one">one</option>
+        <option value="two">two</option>
+        <option value="three">three</option>
+      </select>
+      <select id="son"></select>
+  	</form>
+  	<script type="text/javascript">
+  		(function() {
+        var father = document.getElementById('father');
+        var son = document.getElementById('son');
+        father.addEventListener('change', handler);
+        function handler(e) {
+          son.options.length = 0;
+          switch(e.target.selectedIndex) {
+            case 0 : {
+              var viaDom = document.createDocumentFragment();
+              for(var j = 6; j < 8; j++){
+                var option = document.createElement('option');
+                option.value = j;
+                option.text = j;
+                viaDom.appendChild(option);
+              }
+              son.appendChild(viaDom);
+              break;
+            }
+            case 1 : {
+              var option = document.createElement('option');
+              option.value = "4";
+              option.text = "4";
+              son.appendChild(option);
+              break;
+            }
+            case 2 : {
+              var option = document.createElement('option');
+              option.value = "5";
+              option.text = "5";
+              son.appendChild(option);
+              break;
+            }
+          }
+        }
+  		})();
+
+  	</script>
+  </body>
+</html>

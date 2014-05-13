@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+  	<title>限制输入框字数</title>
+  </head>
+  <body>
+  	<form>
+  	  <label for="handler1">第一个：</label>
+  	  <input type="text" id="handler1">
+  	  <label for="handler2">第二个</label>
+  	  <input type="text" id="handler2">
+  	  <!-- 简单，不过不能进行细操作，比如需要一些细节操作 -->
+   	  <label for="handler3">第三个</label>
+  	  <input type="text" id="handler3" maxlength="10">
+  	</form>
+  	<script type="text/javascript">
+  		(function() {
+  			var text1 = document.getElementById('handler1');
+  			// 必须监听两个的原因是避免一直按着不放情况，和中文输入情况
+  			// keypress一样有问题
+  			// 当不通过键盘时，无法进行检查，需要检查粘贴时间，可以监听复制粘贴事件
+  			// 和鼠标事件，不过就很复杂了
+  			text1.addEventListener('keydown', handler1);
+  			text1.addEventListener('keyup', handler1);
+  			// iE9+ h5 简单，可以解决上面的所有问题
+  			var text2 = document.getElementById('handler2');
+  			text2.addEventListener('textInput', handler2);
+
+  			function handler1(e) {
+  				var value = e.target.value;
+  				if(value.length >= 10) {
+  					value = value.substring(0, 10);
+  					e.target.value = value;
+  				}
+  			}
+  			function handler2(e) {
+  				var value = e.target.value + e.data;
+  				if(value.length >= 10) {
+  					value = value.substring(0, 10);
+  					e.target.value = value;
+  					e.preventDefault();
+  				}
+  			}
+  		})();
+
+  	</script>
+  </body>
+</html>
