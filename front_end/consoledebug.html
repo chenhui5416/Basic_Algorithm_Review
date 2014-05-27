@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+  	<title>下来菜单联动</title>
+  </head>
+  <body>
+    <h3>console.log一个问题</h3>
+    <p><a href="http://stackoverflow.com/questions/4057440/is-chromes-javascript-console-lazy-about-evaluating-arrays">http://stackoverflow.com/questions/4057440/is-chromes-javascript-console-lazy-about-evaluating-arrays</a></P>
+    <p><a href="http://lichgo.com/chrome-console-bug/">http://lichgo.com/chrome-console-bug/</a></p>
+    <p>查看上面几个帖子你就知道原因，大致原因就是webkit 下的console.log保存的是对象的引用，而不是对象的值.所以在打印对象时是会出错的，浏览器中console.log是最后打印的（猜的）。另一个是node中的，node的打印结果正确，是因为node对console.log打印时保存值。</p>
+  	<script type="text/javascript">
+    // http://stackoverflow.com/questions/11118758/bug-in-console-log
+  		(function() {
+        var myList = new Object();
+        var item   = new Object();
+        item.text  = "item-1";
+        myList[3]  = item;
+        
+        console.log(myList);
+        console.log(myList[3].text);
+        
+        // Assign another object to the same entry
+        var item2   = new Object();
+        item2.text  = "item-2";
+        myList[3]  = item2;
+        
+        console.log(myList);
+        console.log(myList[3].text);
+  		})();
+
+  	</script>
+  </body>
+</html>
